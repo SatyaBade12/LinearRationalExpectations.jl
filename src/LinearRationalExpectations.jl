@@ -13,4 +13,9 @@ include("variance.jl")
 export VarianceWs, compute_variance!, correlation, variance_decomposition,
     variance_decomposition!, autocovariance!, autocorrelation!
 
+import SnoopPrecompile
+SnoopPrecompile.@precompile_all_calls begin
+    include("../test/runtests.jl")
+end
+
 end    
