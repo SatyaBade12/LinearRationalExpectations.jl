@@ -11,7 +11,7 @@ struct LyapdWs
     XX::Vector{Float64}
     nonstationary_variables::Vector{Bool}
     nonstationary_trends::Vector{Bool}
-    dgees_ws::SchurWs
+    dgees_ws::SchurWs{Float64}
     linsolve_ws1::LUWs
     linsolve_ws2::LUWs
     function LyapdWs(n::Int)
@@ -151,7 +151,7 @@ function extended_lyapd_core!(Σ::AbstractMatrix{Float64},
     n = size(A, 1)
     row = n
     while row >= 1
-        if row == 1 || A[row, row - 1] == 0
+        if row == 1 || A[row, row - 1] == 0.0
             if A[row, row] > 1 - 1e-6
                 ws.nonstationary_trends[row] = true
             else 
