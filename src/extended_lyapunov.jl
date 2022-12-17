@@ -152,7 +152,7 @@ function extended_lyapd_core!(Σ::AbstractMatrix{Float64},
     row = n
     while row >= 1
         if row == 1 || A[row, row - 1] == 0.0
-            if A[row, row] > 1 - 1e-6
+            if A[row, row] > 1.0 - 1e-6
                 ws.nonstationary_trends[row] = true
             else 
                 solve_one_row!(Σ, A, B, n, row, ws)
@@ -172,7 +172,7 @@ function extended_lyapd_core!(Σ::AbstractMatrix{Float64},
             row -= 1
         else
             a = A[row, row]
-            if a*a + A[row, row - 1]*A[row - 1, row] > 1 - 2e-6
+            if a*a + A[row, row - 1]*A[row - 1, row] > 1.0 - 2e-6
                 ws.nonstationary_trends[row] = true
                 ws.nonstationary_trends[row - 1] = true
             else 
